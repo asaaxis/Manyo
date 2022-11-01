@@ -2,6 +2,11 @@
 
 <p><%= notice %></p>
 
+<%= form_with(url: tasks_path, method: :get, scope: :task, local: true) do |form| %>
+  <%= form.text_field :title %>
+  <%= form.submit 'search', name: nil %>
+<% end %>
+
 <table>
   <tr>
     <th>タイトル</th>
@@ -9,18 +14,17 @@
     <th>終了期限</th>
     <th>ステータス</th>
   </tr>
-
-  <% @tasks.each do |task| %>
+  <% @tasks.each do |task| %> 
     <tr>
       <td><%= task.title %></td>
       <td><%= task.content %></td>
       <td><%= task.limit %></td>
       <td><%= task.status %></td>
-      <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
-      <td><%= link_to "タスクを編集する", edit_task_path(task.id) %></td>
-      <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
+      <td><%= link_to '詳細', task_path(task.id) %></td>
+      <td><%= link_to '編集', edit_task_path(task.id) %></td>
+      <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
     </tr>
   <% end %>
+</table>
   <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %> |
   <%= link_to '新しくタスクを投稿する', new_task_path %>
-</table>

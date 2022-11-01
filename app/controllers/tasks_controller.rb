@@ -1,10 +1,21 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all.order(id: "DESC")
+    @tasks = Task.all.order(id: :desc)
     if params[:sort_expired]
       @tasks = Task.all.order(limit: :desc)
     else
-      @tasks = Task.all.order(id: "DESC")
+      @tasks = Task.all.order(id: :desc)
+    end
+
+    if params[:task].present?
+    @tasks = Task.where("title LIKE ?", "%#{params[:task][:title]}%") 
+    #   title = params[:task][:title]
+      # status = params[:rask][:title]
+      # if title.present?
+      #   @tasks = Task.title(title)
+      # elsif もし渡されたパラメータがタイトルのみだったとき
+      # elsif もし渡されたパラメータがステータスのみだったとき
+    #   end
     end
   end
 
