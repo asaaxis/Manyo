@@ -15,7 +15,7 @@
 | title    | string   |
 | content  | text     |
 | limit    | date     |
-| status   | string   |
+| status   | integer  |
 | priority | string   |
 
 
