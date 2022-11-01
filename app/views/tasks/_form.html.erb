@@ -25,7 +25,7 @@
   </div>
   <div class="task_status">
     <%= form.label :status %>
-    <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択してください" %>
+    <%= form.select :status, Task.statuses.keys.to_a, include_blank: "選択してください" %>
   </div>
   <%= form.submit %>
 <% end %>

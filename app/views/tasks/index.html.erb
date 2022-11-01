@@ -5,6 +5,7 @@
 <%= form_with(url: tasks_path, method: :get, scope: :task, local: true) do |form| %>
   <%= form.text_field :title %>
   <%= form.submit 'search', name: nil %>
+  <%= form.select 'status', Task.statuses.keys.to_a, include_blank: "ステータス" %>
 <% end %>
 
 <table>

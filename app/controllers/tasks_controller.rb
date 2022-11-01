@@ -8,14 +8,15 @@ class TasksController < ApplicationController
     end
 
     if params[:task].present?
-    @tasks = Task.where("title LIKE ?", "%#{params[:task][:title]}%") 
-    #   title = params[:task][:title]
-      # status = params[:rask][:title]
-      # if title.present?
-      #   @tasks = Task.title(title)
-      # elsif もし渡されたパラメータがタイトルのみだったとき
-      # elsif もし渡されたパラメータがステータスのみだったとき
-    #   end
+      title = params[:task][:title]
+      status = params[:task][:status]
+      if title.present? && status.present?
+        @tasks = Task.title_status(title,status)
+      elsif title.present?
+        @tasks = Task.title(title)
+      elsif status.present?
+        @tasks = Task.status(status)
+      end
     end
   end
 
