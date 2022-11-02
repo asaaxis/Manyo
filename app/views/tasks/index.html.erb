@@ -8,7 +8,7 @@
   <%= form.select 'status', Task.statuses.keys.to_a, include_blank: "ステータス" %>
 <% end %>
 
-<table>
+<table class = "table table-striped">
   <tr>
     <th>タイトル</th>
     <th>内容</th>
@@ -23,14 +23,20 @@
       <td><%= task.limit %></td>
       <td><%= task.status %></td>
       <td><%= task.priority %></td>
-      <td><%= link_to '詳細', task_path(task.id) %></td>
-      <td><%= link_to '編集', edit_task_path(task.id) %></td>
-      <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
+      <td><button type="button" class="btn btn-outline-primary"><%= link_to '詳細', task %></button></td>
+      <td><button type="button" class="btn btn-outline-success"><%= link_to '編集', edit_task_path(task.id) %></button></td>
+      <td><button type="button" class="btn btn-outline-danger"><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></button></td>
     </tr>
   <% end %>
-</table>
-  <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true") %> |
-  <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %> |
-  <%= link_to '新しくタスクを投稿する', new_task_path %>
 
+  <button type="button" class="btn btn-outline-primary btn-sm">
+    <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true") %>
+  </button>
+  <button type="button" class="btn btn-outline-primary btn-sm">
+    <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
+  </button>
+  <button type="button" class="btn btn-outline-primary btn-sm">
+    <%= link_to '新しくタスクを投稿する', new_task_path %>
+  </button>
+</table>
   <%= paginate @tasks %>

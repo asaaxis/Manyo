@@ -5,4 +5,6 @@
 <p>ステータス: <%= @task.status %></p>
 <p>優先度: <%= @task.priority %></p>
 
-<%= link_to "タスク一覧画面にもどる", tasks_path %>
+<button type="button" class="btn btn-outline-primary btn-sm">
+  <%= link_to "タスク一覧画面にもどる", tasks_path %>
+</button>

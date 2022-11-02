@@ -49,3 +49,4 @@ RSpec.describe Task, type: :model do
     end
   end
 end
+# bundle exec rspec spec/models/task_spec.rb

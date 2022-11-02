@@ -36,7 +36,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '終了期限が遅いタスクが一番上に表示される' do
         visit tasks_path
         FactoryBot.create(:task, limit: '2022-11-03')
-        click_on '終了期限でソートする'
+        click_button "終了期限でソートする"
         task_list = all('tbody')
         expect(task_list[0]).to have_content '2022-11-03'
       end
@@ -44,7 +44,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '優先順位でソートするボタンを押した場合' do
       it '優先順位が高いタスクが一番上に表示される' do
         visit tasks_path
-        click_on '優先順位でソートする'
+        click_button "優先順位でソートする"
         task_list = all('tbody')
         expect(task_list[0]).to have_content '高'
       end
