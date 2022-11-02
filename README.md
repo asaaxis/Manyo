@@ -16,7 +16,7 @@
 | content  | text     |
 | limit    | date     |
 | status   | integer  |
-| priority | string   |
+| priority | integer  |
 
 
 # label
