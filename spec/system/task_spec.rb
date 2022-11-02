@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  let!(:task) { FactoryBot.create(:task, title: 'task', content: 'tasks', limit: '2022/11/03', status: '完了') }
+  let!(:task) { FactoryBot.create(:task, title: 'task', content: 'tasks', limit: '2022/11/03', status: '完了', priority: '高') }
     FactoryBot.create(:second_task, title: '付け加えた名前', content: '付け加えたコンテント')
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
@@ -39,6 +39,14 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_on '終了期限でソートする'
         task_list = all('tbody')
         expect(task_list[0]).to have_content '2022-11-03'
+      end
+    end
+    context '優先順位でソートするボタンを押した場合' do
+      it '優先順位が高いタスクが一番上に表示される' do
+        visit tasks_path
+        click_on '優先順位でソートする'
+        task_list = all('tbody')
+        expect(task_list[0]).to have_content '高'
       end
     end
   end
