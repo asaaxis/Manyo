@@ -18,6 +18,7 @@ gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
 gem 'kaminari'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
