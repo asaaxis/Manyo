@@ -15,8 +15,8 @@
 | title    | string   |
 | content  | text     |
 | limit    | date     |
-| status   | string   |
-| priority | string   |
+| status   | integer  |
+| priority | integer  |
 
 
 # label
