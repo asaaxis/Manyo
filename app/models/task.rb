@@ -2,6 +2,8 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
 
+  belongs_to :user
+  
   enum status: {未着: 0, 着手中: 1, 完了: 2}
   enum priority: {高: 0, 中: 1, 低: 2}
 
