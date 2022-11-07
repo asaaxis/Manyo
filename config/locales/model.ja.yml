@@ -13,6 +13,7 @@ ja:
       user:
         title: タイトル
         name: 名前
+        admin: 管理者権限
         email: メールアドレス
         current_password: 現在のパスワード
         password: パスワード
