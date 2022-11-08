@@ -5,8 +5,8 @@ User.create!(name: "管理者",
               admin: true)
 
 
-# User.create!(name: "taro",
-#                 email: "taro@example.com",
-#                 password: "111111",
-#                 password_confirmation: "111111",
-#                 )
+User.create!(name: "taro",
+                email: "taro@example.com",
+                password: "111111",
+                password_confirmation: "111111",
+                )
