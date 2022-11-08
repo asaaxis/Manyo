@@ -1,23 +1,23 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all.order(id: :desc).page(params[:page]).per(8)
+    @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(8)
     if params[:sort_expired]
-      @tasks = Task.all.order(limit: :desc).page(params[:page])
+      @tasks = current_user.tasks.order(limit: :desc).page(params[:page])
     end
     
     if params[:sort_priority]
-      @tasks = Task.all.order(priority: :asc).page(params[:page])
+      @tasks = current_user.tasks.order(priority: :asc).page(params[:page])
     end
 
     if params[:task].present?
       title = params[:task][:title]
       status = params[:task][:status]
       if title.present? && status.present?
-        @tasks = Task.title_status(title,status).page(params[:page])
+        @tasks = current_user.tasks.title_status(title,status).page(params[:page])
       elsif title.present?
-        @tasks = Task.title(title).page(params[:page])
+        @tasks = current_user.tasks.title(title).page(params[:page])
       elsif status.present?
-        @tasks = Task.status(status).page(params[:page])
+        @tasks = current_user.tasks.status(status).page(params[:page])
       end
     end
   end
@@ -28,7 +28,7 @@ class TasksController < ApplicationController
 
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to tasks_path, notice: "タスクを作成しました！"
     else
@@ -62,6 +62,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content, :limit, :status, :priority)
+    params.require(:task).permit(:title, :content, :limit, :status, :priority, :user_id)
   end
 end
