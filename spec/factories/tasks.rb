@@ -1,6 +1,4 @@
 FactoryBot.define do
-  # let!(:user) { FactoryBot.create(:user) }
-  # let!(:task) { FactoryBot.create(:task, user: user) }
   factory :task do
     title { 'Factoryで作ったデフォルトのタイトル1' }
     content { 'Factoryで作ったデフォルトのコンテント1' }
