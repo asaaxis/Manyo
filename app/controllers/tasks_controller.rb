@@ -12,12 +12,15 @@ class TasksController < ApplicationController
     if params[:task].present?
       title = params[:task][:title]
       status = params[:task][:status]
+      label = params[:task][:label_id]
       if title.present? && status.present?
         @tasks = current_user.tasks.title_status(title,status).page(params[:page])
       elsif title.present?
         @tasks = current_user.tasks.title(title).page(params[:page])
       elsif status.present?
         @tasks = current_user.tasks.status(status).page(params[:page])
+      elsif label.present?
+        @tasks = @tasks.joins(:labels).where(labels: { id: label })
       end
     end
   end
@@ -62,6 +65,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content, :limit, :status, :priority, :user_id)
+    params.require(:task).permit(:title, :content, :limit, :status, :priority, :user_id, { label_ids: [] })
   end
 end

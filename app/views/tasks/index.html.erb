@@ -4,8 +4,9 @@
 
 <%= form_with(url: tasks_path, method: :get, scope: :task, local: true) do |form| %>
   <%= form.text_field :title %>
-  <%= form.submit 'search', name: nil %>
   <%= form.select 'status', Task.statuses.keys.to_a, include_blank: "ステータス" %>
+  <%= form.select :label_id, Label.all.collect{ |p| [p.name, p.id]}, include_blank: "ラベル" %>
+  <%= form.submit 'search', name: nil %>
 <% end %>
 
 <table class = "table table-striped">
@@ -16,6 +17,7 @@
     <th>終了期限</th>
     <th>ステータス</th>
     <th>優先度</th>
+    <th>ラベル</th>
   </tr>
   <% @tasks.each do |task| %> 
     <tr>
@@ -25,6 +27,11 @@
       <td><%= task.limit %></td>
       <td><%= task.status %></td>
       <td><%= task.priority %></td>
+      <td>
+        <% task.labels.each do |label| %>
+          <%= label.name %>
+        <% end %>
+      </td>
       <td><button type="button" class="btn btn-outline-primary"><%= link_to '詳細', task %></button></td>
       <td><button type="button" class="btn btn-outline-success"><%= link_to '編集', edit_task_path(task.id) %></button></td>
       <td><button type="button" class="btn btn-outline-danger"><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></button></td>
